@@ -2,11 +2,18 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
-import { increment, incrementByAmount } from "./redux/counter/counterSlice";
+import {
+  addText,
+  increment,
+  incrementByAmount,
+  updateText,
+} from "./redux/counter/counterSlice";
 
 function App() {
   const dispatch = useDispatch();
   const count = useSelector((state) => state.counter.value);
+  const text = useSelector((state) => state.counter.text);
+  const textList = useSelector((state) => state.counter.textList);
 
   return (
     <>
@@ -19,6 +26,26 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      <div>
+        <input
+          onChange={(event) => {
+            dispatch(updateText(event.target.value));
+          }}
+          value={text}
+          placeholder="input here"
+        />
+        <button
+          onClick={() => {
+            dispatch(addText(text));
+            dispatch(updateText(""));
+          }}
+        >
+          add
+        </button>
+      </div>
+      {textList.map((text) => (
+        <h2 key={text}>{text}</h2>
+      ))}
       <div className="card">
         <button
           onClick={() => {
