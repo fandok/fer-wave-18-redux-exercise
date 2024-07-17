@@ -1,20 +1,10 @@
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addText,
-  increment,
-  incrementByAmount,
-  updateText,
-} from "./redux/counter/counterSlice";
+import TextComponent from "./text";
+import CountComponent from "./count";
 
 function App() {
-  const dispatch = useDispatch();
-  const count = useSelector((state) => state.counter.value);
-  const text = useSelector((state) => state.counter.text);
-  const textList = useSelector((state) => state.counter.textList);
-
   return (
     <>
       <div>
@@ -26,41 +16,9 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      <div>
-        <input
-          onChange={(event) => {
-            dispatch(updateText(event.target.value));
-          }}
-          value={text}
-          placeholder="input here"
-        />
-        <button
-          onClick={() => {
-            dispatch(addText(text));
-            dispatch(updateText(""));
-          }}
-        >
-          add
-        </button>
-      </div>
-      {textList.map((text) => (
-        <h2 key={text}>{text}</h2>
-      ))}
+      <TextComponent />
       <div className="card">
-        <button
-          onClick={() => {
-            dispatch(increment());
-          }}
-        >
-          count is {count}
-        </button>
-        <button
-          onClick={() => {
-            dispatch(incrementByAmount(10));
-          }}
-        >
-          count is {count}
-        </button>
+        <CountComponent />
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
