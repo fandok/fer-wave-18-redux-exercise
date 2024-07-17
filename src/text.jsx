@@ -1,5 +1,41 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addText, updateText } from "./redux/text/textSlice";
+import { addText, editText, updateText } from "./redux/text/textSlice";
+import { CiEdit } from "react-icons/ci";
+import { useState } from "react";
+
+const TextChild = ({ text, index }) => {
+  const dispatch = useDispatch();
+  const [input, setInput] = useState(text);
+  const [isEdit, setIsEdit] = useState(false);
+
+  return isEdit ? (
+    <>
+      <input
+        value={input}
+        onChange={(event) => {
+          setInput(event.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          setIsEdit(false);
+          dispatch(editText({ value: input, index }));
+        }}
+      >
+        edit
+      </button>
+    </>
+  ) : (
+    <>
+      <h2 style={{ margin: 0 }}>{text}</h2>
+      <CiEdit
+        onClick={() => setIsEdit(true)}
+        style={{ cursor: "pointer" }}
+        size={30}
+      />
+    </>
+  );
+};
 
 const TextComponent = () => {
   const dispatch = useDispatch();
@@ -25,8 +61,18 @@ const TextComponent = () => {
           add
         </button>
       </div>
-      {textList.map((text) => (
-        <h2 key={text}>{text}</h2>
+      {textList.map((text, index) => (
+        <div
+          style={{
+            display: "flex",
+            gap: 30,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          key={text}
+        >
+          <TextChild text={text} index={index} />
+        </div>
       ))}
     </>
   );

@@ -15,10 +15,13 @@ export const textSlice = createSlice({
     addText: (state, action) => {
       state.textList = [...state.textList, action.payload];
     },
+    editText: (state, action) => {
+      state.textList[action.payload.index] = action.payload.value;
+    },
   },
 });
 
-export const { updateText, addText } = textSlice.actions;
+export const { updateText, addText, editText } = textSlice.actions;
 
 const textReducer = textSlice.reducer;
 
