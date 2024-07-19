@@ -1,0 +1,28 @@
+.container {
+  font-family: Arial;
+  color: #000;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+}
+
+.dashboard {
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.listOrder {
+  font-weight: 700;
+  padding: 2px 8px;
+  margin-bottom: 18px;
+  border-left: 4px solid #0d28a6;
+}
+
+.tableHeader {
+  background: #cfd4ed !important;
+  padding: 12px 16px !important;
+}
+
+.tableRow {
+  padding: 12px 16px !important;
+}
